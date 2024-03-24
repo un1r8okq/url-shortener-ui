@@ -20,7 +20,9 @@ function App() {
           </Nav>
         </Container>
       </Navbar>
-      <Outlet />
+      <Container className="flex-grow-1 d-flex justify-content-center align-items-center">
+        <Outlet />
+      </Container>
     </div>
   );
 }

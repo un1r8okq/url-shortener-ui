@@ -58,15 +58,13 @@ export default function ShortenUrl() {
   );
 
   return (
-    <div className="d-flex align-items-center justify-content-center flex-grow-1 m-3">
-      <div className="d-flex flex-column justify-content-center align-items-center">
-        {shortenedUrl === '' ? shortenUrlForm : shortenUrlResult}
-        {error && (
-          <Alert className="w-50 mt-3" variant="danger">
-            {error}
-          </Alert>
-        )}
-      </div>
+    <div className="d-flex flex-column align-items-center">
+      {shortenedUrl === '' ? shortenUrlForm : shortenUrlResult}
+      {error && (
+        <Alert className="w-50 mt-3" variant="danger">
+          {error}
+        </Alert>
+      )}
     </div>
   );
 }

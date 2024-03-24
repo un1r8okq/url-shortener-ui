@@ -55,7 +55,7 @@ export default function AllUrls() {
 
     return (
       <>
-        <Table>
+        <Table className='mt-3'>
           <thead>
             <tr>
               <th>Created at</th>
@@ -92,5 +92,5 @@ export default function AllUrls() {
     );
   };
 
-  return <div className="h-100 m-5 d-flex flex-column">{getContent()}</div>;
+  return <div className="h-100 d-flex flex-column">{getContent()}</div>;
 }
