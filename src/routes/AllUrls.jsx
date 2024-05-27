@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { formatRelative, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { Alert, Button, ButtonGroup, Spinner, Table } from 'react-bootstrap';
 
@@ -90,6 +91,7 @@ export default function AllUrls() {
               <th>Created at</th>
               <th>Short URL</th>
               <th>Long URL</th>
+              <th>Last visited</th>
             </tr>
           </thead>
           <tbody>
@@ -101,6 +103,7 @@ export default function AllUrls() {
                 </td>
                 <td><a href={url.shortenedUrl}>{getPath(url.shortenedUrl)}</a></td>
                 <td><a href={url.longUrl}>{trimStr(url.longUrl)}</a></td>
+                <td>{url.lastVisitTimestampUtc == null ? 'never' : formatRelative(parseISO(url.lastVisitTimestampUtc), new Date())}</td>
               </tr>
             ))}
           </tbody>
