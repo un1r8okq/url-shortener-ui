@@ -35,6 +35,35 @@ export default function AllUrls() {
     fetchUrls();
   }, [pageNumber]);
 
+  /**
+   * @param {string} str 
+   * @returns {string}
+   */
+  const trimStr = (str) => {
+    const maxLen = 50;
+
+    if (str.length <= maxLen) {
+      return str;
+    }
+
+    return str.substring(0, maxLen - 3) + '...';
+  };
+
+  /**
+   * 
+   * @param {string} url
+   * @returns {?string}
+   */
+  const getPath = (urlStr) => {
+    if (!URL.canParse(urlStr)) {
+      return null;
+    }
+  
+    const url = new URL(urlStr);
+
+    return url.pathname;
+  };
+
   const getContent = () => {
     if (error !== '') {
       return <Alert variant="danger">{error}</Alert>;
@@ -55,11 +84,12 @@ export default function AllUrls() {
 
     return (
       <>
-        <Table className='mt-3'>
+        <Table striped>
           <thead>
             <tr>
               <th>Created at</th>
-              <th>URL</th>
+              <th>Short URL</th>
+              <th>Long URL</th>
             </tr>
           </thead>
           <tbody>
@@ -69,7 +99,8 @@ export default function AllUrls() {
                   {new Date(url.createdTimestampUtc).toLocaleDateString()} at{' '}
                   {new Date(url.createdTimestampUtc).toLocaleTimeString()}
                 </td>
-                <td>{url.longUrl}</td>
+                <td><a href={url.shortenedUrl}>{getPath(url.shortenedUrl)}</a></td>
+                <td><a href={url.longUrl}>{trimStr(url.longUrl)}</a></td>
               </tr>
             ))}
           </tbody>
