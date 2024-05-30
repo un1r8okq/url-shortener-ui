@@ -17,6 +17,9 @@ function App() {
             <LinkContainer to="/all-urls">
               <Nav.Link>All URLs</Nav.Link>
             </LinkContainer>
+            <LinkContainer to="/audit-logs">
+              <Nav.Link>Audit Logs</Nav.Link>
+            </LinkContainer>
           </Nav>
         </Container>
       </Navbar>

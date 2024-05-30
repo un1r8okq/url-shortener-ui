@@ -1,7 +1,9 @@
 import axios from 'axios';
-import { formatRelative, parseISO } from 'date-fns';
 import { useEffect, useState } from 'react';
 import { Alert, Button, ButtonGroup, Spinner, Table } from 'react-bootstrap';
+
+import { getPathFromUrl, trimStr } from '../utilities';
+import RelativeDateCell from '../components/RelativeDateCell';
 
 export default function AllUrls() {
   const [error, setError] = useState('');
@@ -36,35 +38,6 @@ export default function AllUrls() {
     fetchUrls();
   }, [pageNumber]);
 
-  /**
-   * @param {string} str 
-   * @returns {string}
-   */
-  const trimStr = (str) => {
-    const maxLen = 50;
-
-    if (str.length <= maxLen) {
-      return str;
-    }
-
-    return str.substring(0, maxLen - 3) + '...';
-  };
-
-  /**
-   * 
-   * @param {string} url
-   * @returns {?string}
-   */
-  const getPath = (urlStr) => {
-    if (!URL.canParse(urlStr)) {
-      return null;
-    }
-  
-    const url = new URL(urlStr);
-
-    return url.pathname;
-  };
-
   const getContent = () => {
     if (error !== '') {
       return <Alert variant="danger">{error}</Alert>;
@@ -88,7 +61,7 @@ export default function AllUrls() {
         <Table striped>
           <thead>
             <tr>
-              <th>Created at</th>
+              <th>Created</th>
               <th>Short URL</th>
               <th>Long URL</th>
               <th>Last visited</th>
@@ -97,13 +70,10 @@ export default function AllUrls() {
           <tbody>
             {urls.map((url, index) => (
               <tr key={index}>
-                <td>
-                  {new Date(url.createdTimestampUtc).toLocaleDateString()} at{' '}
-                  {new Date(url.createdTimestampUtc).toLocaleTimeString()}
-                </td>
-                <td><a href={url.shortenedUrl}>{getPath(url.shortenedUrl)}</a></td>
+                <RelativeDateCell>{url.createdTimestampUtc}</RelativeDateCell>
+                <td><a href={url.shortenedUrl}>{getPathFromUrl(url.shortenedUrl)}</a></td>
                 <td><a href={url.longUrl}>{trimStr(url.longUrl)}</a></td>
-                <td>{url.lastVisitTimestampUtc == null ? 'never' : formatRelative(parseISO(url.lastVisitTimestampUtc), new Date())}</td>
+                <RelativeDateCell>{url.lastVisitTimestampUtc}</RelativeDateCell>
               </tr>
             ))}
           </tbody>
