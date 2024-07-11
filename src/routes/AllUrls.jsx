@@ -8,7 +8,7 @@ import RelativeDateCell from '../components/RelativeDateCell';
 export default function AllUrls() {
   const [error, setError] = useState('');
   const [isLoading, setLoading] = useState(true);
-  const [pageNumber, setPageNumber] = useState(0);
+  const [pageNumber, setPageNumber] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const [urls, setUrls] = useState([]);
 
