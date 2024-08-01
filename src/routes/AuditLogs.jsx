@@ -37,27 +37,36 @@ export default function AuditLogs() {
     fetchUrls();
   }, [pageNumber]);
 
-  const translateLogType = (type) => ({
-    url_visited: 'Visited',
-    url_shortened: 'Shortened',
-  }[type])
+  const translateLogType = (type) =>
+    ({
+      url_visited: 'Visited',
+      url_shortened: 'Shortened',
+    })[type];
+
+  const centerContent = (jsx) => {
+    return (
+      <div className="flex-grow-1 d-flex justify-content-center align-items-center">
+        {jsx}
+      </div>
+    );
+  };
 
   const getContent = () => {
     if (error !== '') {
-      return <Alert variant="danger">{error}</Alert>;
+      return centerContent(<Alert variant="danger">{error}</Alert>);
     }
 
     if (isLoading) {
-      return (
+      return centerContent(
         <div className="flex-grow-1 d-flex justify-content-center align-items-center">
           <Spinner className="m-2" />
           <h3>Loading audit logs</h3>
-        </div>
+        </div>,
       );
     }
 
     if (logs.length === 0) {
-      return <h2>No audit logs have been written yet.</h2>;
+      return centerContent(<h2>No audit logs have been written yet.</h2>);
     }
 
     return (
@@ -84,13 +93,15 @@ export default function AuditLogs() {
           <Button
             variant="secondary"
             disabled={pageNumber < 1}
-            onClick={() => setPageNumber(pageNumber - 1)}>
+            onClick={() => setPageNumber(pageNumber - 1)}
+          >
             Previous page
           </Button>
           <Button
             variant="secondary"
             disabled={pageNumber >= totalPages - 1}
-            onClick={() => setPageNumber(pageNumber + 1)}>
+            onClick={() => setPageNumber(pageNumber + 1)}
+          >
             Next page
           </Button>
         </ButtonGroup>

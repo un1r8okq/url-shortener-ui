@@ -35,7 +35,8 @@ export default function CreateShortUrl({
             <Button
               variant="primary"
               type="submit"
-              disabled={submitButtonDisabled}>
+              disabled={submitButtonDisabled}
+            >
               {submitButtonDisabled ? 'Shortening...' : 'Shorten'}
             </Button>
           </Col>

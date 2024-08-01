@@ -10,12 +10,16 @@ const { createProxyMiddleware } = require('http-proxy-middleware');
  */
 module.exports = function (app) {
   app.use(
-    ['/api', '/s/*'],
+    ['/api/*', '/s/*', '/login/*', '/oauth2/*'],
     createProxyMiddleware({
       target: 'http://localhost:8080',
       changeOrigin: true,
       logLevel: 'debug',
       secure: false,
+      onProxyReq: (proxyReq, req, res) => {
+        proxyReq.setHeader('X-Forwarded-Host', req.get('Host'));
+        proxyReq.setHeader('X-Forwarded-Proto', req.protocol);
+      },
     }),
   );
 };

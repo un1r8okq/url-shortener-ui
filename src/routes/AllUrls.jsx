@@ -1,7 +1,7 @@
-import axios from 'axios';
 import { useEffect, useState } from 'react';
 import { Alert, Button, ButtonGroup, Spinner, Table } from 'react-bootstrap';
 
+import apiClient from '../api/apiClient';
 import { getPathFromUrl, trimStr } from '../utilities';
 import RelativeDateCell from '../components/RelativeDateCell';
 
@@ -18,11 +18,8 @@ export default function AllUrls() {
       setError('');
       setUrls([]);
       try {
-        const response = await axios.get(
-          `/api/v1/urls?pageNumber=${pageNumber}`,
-        );
-
-        const { data, paginationMetadata } = response.data;
+        const { data, paginationMetadata } =
+          await apiClient.getUrls(pageNumber);
 
         setTotalPages(paginationMetadata.totalPages);
         setUrls(data);
@@ -38,22 +35,30 @@ export default function AllUrls() {
     fetchUrls();
   }, [pageNumber]);
 
+  const centerContent = (jsx) => {
+    return (
+      <div className="flex-grow-1 d-flex justify-content-center align-items-center">
+        {jsx}
+      </div>
+    );
+  };
+
   const getContent = () => {
     if (error !== '') {
-      return <Alert variant="danger">{error}</Alert>;
+      return centerContent(<Alert variant="danger">{error}</Alert>);
     }
 
     if (isLoading) {
-      return (
-        <div className="flex-grow-1 d-flex justify-content-center align-items-center">
+      return centerContent(
+        <>
           <Spinner className="m-2" />
           <h3>Loading URLs</h3>
-        </div>
+        </>,
       );
     }
 
     if (urls.length === 0) {
-      return <h2>No URLs have been shortened yet.</h2>;
+      return centerContent(<h2>No URLs have been shortened yet.</h2>);
     }
 
     return (
@@ -71,8 +76,14 @@ export default function AllUrls() {
             {urls.map((url, index) => (
               <tr key={index}>
                 <RelativeDateCell>{url.createdTimestampUtc}</RelativeDateCell>
-                <td><a href={url.shortenedUrl}>{getPathFromUrl(url.shortenedUrl)}</a></td>
-                <td><a href={url.longUrl}>{trimStr(url.longUrl)}</a></td>
+                <td>
+                  <a href={url.shortenedUrl}>
+                    {getPathFromUrl(url.shortenedUrl)}
+                  </a>
+                </td>
+                <td>
+                  <a href={url.longUrl}>{trimStr(url.longUrl)}</a>
+                </td>
                 <RelativeDateCell>{url.lastVisitTimestampUtc}</RelativeDateCell>
               </tr>
             ))}
@@ -82,13 +93,15 @@ export default function AllUrls() {
           <Button
             variant="secondary"
             disabled={pageNumber < 1}
-            onClick={() => setPageNumber(pageNumber - 1)}>
+            onClick={() => setPageNumber(pageNumber - 1)}
+          >
             Previous page
           </Button>
           <Button
             variant="secondary"
             disabled={pageNumber >= totalPages - 1}
-            onClick={() => setPageNumber(pageNumber + 1)}>
+            onClick={() => setPageNumber(pageNumber + 1)}
+          >
             Next page
           </Button>
         </ButtonGroup>
