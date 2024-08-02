@@ -1,4 +1,4 @@
-import React, { createContext, useState, useEffect } from 'react';
+import { createContext, useState, useEffect } from 'react';
 import httpClient from './api/httpClient';
 
 const AuthContext = createContext(false);
