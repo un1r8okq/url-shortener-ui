@@ -1,6 +1,5 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Container } from 'react-bootstrap';
+import Container from 'react-bootstrap/Container';
 import { Outlet } from 'react-router-dom';
 import { AuthProvider } from './AuthProvider';
 import Navigation from './components/Navigation';

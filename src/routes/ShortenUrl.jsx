@@ -3,7 +3,7 @@ import axios from 'axios';
 import { useState } from 'react';
 import CreateShortUrl from '../components/CreateShortUrl';
 import ShortUrlResult from '../components/ShortUrlResult';
-import { Alert } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
 
 export default function ShortenUrl() {
   const [shortenButtonDisabled, setShortenButtonDisabled] = useState(false);
