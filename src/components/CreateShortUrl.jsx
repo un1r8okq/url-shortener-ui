@@ -3,11 +3,12 @@ import Button from 'react-bootstrap/Button';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Form from 'react-bootstrap/Form';
+import PropTypes from 'prop-types';
 
-export default function CreateShortUrl({
+const CreateShortUrl = ({
   shortenButtonDisabled: submitButtonDisabled,
   createShortUrl,
-}) {
+}) => {
   const [url, setUrl] = useState('');
 
   function handleSubmit(event) {
@@ -17,7 +18,7 @@ export default function CreateShortUrl({
 
   return (
     <>
-      <h2 className="mb-4">Enter a long URL... we'll make it short!</h2>
+      <h2 className="mb-4">Enter a long URL... we&apos;ll make it short!</h2>
       <Form onSubmit={handleSubmit}>
         <Row>
           <Col>
@@ -46,4 +47,11 @@ export default function CreateShortUrl({
       </Form>
     </>
   );
-}
+};
+
+CreateShortUrl.propTypes = {
+  shortenButtonDisabled: PropTypes.bool.isRequired,
+  createShortUrl: PropTypes.func.isRequired,
+};
+
+export default CreateShortUrl;

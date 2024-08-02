@@ -1,6 +1,7 @@
 import Button from 'react-bootstrap/Button';
+import PropTypes from 'prop-types';
 
-export default function ShortUrlResult({ shortenedUrl, resetForm }) {
+const ShortUrlResult = ({ shortenedUrl, resetForm }) => {
   return (
     <>
       <h2 className="text-center">
@@ -12,4 +13,11 @@ export default function ShortUrlResult({ shortenedUrl, resetForm }) {
       </Button>
     </>
   );
-}
+};
+
+ShortUrlResult.propTypes = {
+  shortenedUrl: PropTypes.string.isRequired,
+  resetForm: PropTypes.func.isRequired,
+};
+
+export default ShortUrlResult;

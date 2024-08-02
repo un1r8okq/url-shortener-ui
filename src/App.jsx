@@ -1,7 +1,7 @@
 import './App.css';
 import Container from 'react-bootstrap/Container';
 import { Outlet } from 'react-router-dom';
-import { AuthProvider } from './AuthProvider';
+import AuthProvider from './AuthProvider';
 import Navigation from './components/Navigation';
 
 function App() {
