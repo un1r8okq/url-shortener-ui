@@ -2,12 +2,12 @@ import { useEffect, useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table';
 
 import apiClient from '../api/apiClient';
 import { getPathFromUrl, trimStr } from '../utilities';
 import RelativeDateCell from '../components/RelativeDateCell';
+import LoadingMessage from '../components/LoadingMessage';
 
 export default function AllUrls() {
   const [error, setError] = useState('');
@@ -53,12 +53,7 @@ export default function AllUrls() {
     }
 
     if (isLoading) {
-      return centerContent(
-        <>
-          <Spinner className="m-2" />
-          <h3>Loading URLs</h3>
-        </>,
-      );
+      return <LoadingMessage message='Loading URLs' />;
     }
 
     if (urls.length === 0) {

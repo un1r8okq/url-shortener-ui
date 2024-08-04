@@ -1,5 +1,6 @@
 import { createContext } from 'react';
+import constants from './constants';
 
-const AuthContext = createContext(false);
+const authContext = createContext(constants.authStatus.loading);
 
-export default AuthContext;
+export default authContext;

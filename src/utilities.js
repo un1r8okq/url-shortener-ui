@@ -63,3 +63,11 @@ export const trimStr = (str) => {
 
   return str.substring(0, maxLen - 3) + '...';
 };
+
+/**
+ * Create a promise that resolves in a given time period
+ * @param {number} timeout Time to sleep in milliseconds
+ */
+export const sleep = (timeout) => new Promise((resolve) => {
+  setTimeout(() => resolve(), timeout);
+});

@@ -1,10 +1,11 @@
 import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import httpClient from './api/httpClient';
-import AuthContext from './authContext';
+import authContext from './authContext';
+import constants from './constants';
 
 const AuthProvider = ({ children }) => {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [authStatus, setAuthStatus] = useState(constants.authStatus.loading);
 
   useEffect(() => {
     const checkAuthStatus = async () => {
@@ -12,10 +13,10 @@ const AuthProvider = ({ children }) => {
         const response = await httpClient.get('/api/v1/auth/status');
 
         if (response.status === 200) {
-          setIsAuthenticated(true);
+          setAuthStatus(constants.authStatus.authenticated);
         }
       } catch (error) {
-        setIsAuthenticated(false);
+        setAuthStatus(constants.authStatus.unauthenticated);
       }
     };
 
@@ -23,9 +24,9 @@ const AuthProvider = ({ children }) => {
   }, []);
 
   return (
-    <AuthContext.Provider value={isAuthenticated}>
+    <authContext.Provider value={authStatus}>
       {children}
-    </AuthContext.Provider>
+    </authContext.Provider>
   );
 };
 

@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import axios from 'axios';
 import { useState } from 'react';
 import CreateShortUrl from '../components/CreateShortUrl';
 import ShortUrlResult from '../components/ShortUrlResult';
 import Alert from 'react-bootstrap/Alert';
+import apiClient from '../api/apiClient';
 
 export default function ShortenUrl() {
   const [shortenButtonDisabled, setShortenButtonDisabled] = useState(false);
@@ -15,15 +15,8 @@ export default function ShortenUrl() {
     setError('');
 
     try {
-      const result = await axios.post('/api/v1/urls', { longUrl });
-      if (result.status === 201) {
-        setShortenedUrl(result.data.shortenedUrl);
-        return;
-      }
-
-      throw new Error(
-        'Something went wrong when submitting an URL to be shortened. Please try again later.',
-      );
+      const result = await apiClient.shortenUrl(longUrl);
+      setShortenedUrl(result.data.shortenedUrl);
     } catch (error) {
       console.error(error);
 

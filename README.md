@@ -8,5 +8,5 @@ This project was created for me to refresh my React skills. Its sister project i
 
 1. Install NodeJS 20.x.x
 2. Run `npm install`
-3. Run `npm start`
+3. Run `npm run dev`
 4. Start [the API](https://github.com/un1r8okq/url-shortener-api)

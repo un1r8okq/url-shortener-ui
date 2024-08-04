@@ -7,6 +7,7 @@ import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table';
 
 import RelativeDateCell from '../components/RelativeDateCell';
+import LoadingMessage from '../components/LoadingMessage';
 
 export default function AuditLogs() {
   const [error, setError] = useState('');
@@ -61,12 +62,7 @@ export default function AuditLogs() {
     }
 
     if (isLoading) {
-      return centerContent(
-        <div className="flex-grow-1 d-flex justify-content-center align-items-center">
-          <Spinner className="m-2" />
-          <h3>Loading audit logs</h3>
-        </div>,
-      );
+      return <LoadingMessage message='Loading audit logs' />;
     }
 
     if (logs.length === 0) {
