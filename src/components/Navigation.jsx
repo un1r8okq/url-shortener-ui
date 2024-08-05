@@ -4,11 +4,12 @@ import Navbar from 'react-bootstrap/Navbar';
 import { LinkContainer } from 'react-router-bootstrap';
 import AuthContext from '../authContext';
 import { useContext } from 'react';
+import constants from '../constants';
 
 export default function Navigation() {
   const isAuthenticated = useContext(AuthContext);
 
-  const navLinks = isAuthenticated && (
+  const navLinks = isAuthenticated === constants.authStatus.authenticated && (
     <>
       <LinkContainer to="/">
         <Nav.Link>Shorten URL</Nav.Link>
