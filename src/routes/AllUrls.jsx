@@ -91,7 +91,7 @@ export default function AllUrls() {
         <ButtonGroup className="mt-4 m-auto" hidden={totalPages === 1}>
           <Button
             variant="secondary"
-            disabled={pageNumber < 1}
+            disabled={pageNumber <= 1}
             onClick={() => setPageNumber(pageNumber - 1)}
           >
             Previous page

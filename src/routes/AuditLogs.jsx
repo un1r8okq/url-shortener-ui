@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import Alert from 'react-bootstrap/Alert';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Spinner from 'react-bootstrap/Spinner';
 import Table from 'react-bootstrap/Table';
 
 import RelativeDateCell from '../components/RelativeDateCell';
@@ -92,7 +91,7 @@ export default function AuditLogs() {
         <ButtonGroup className="mt-4 m-auto" hidden={totalPages === 1}>
           <Button
             variant="secondary"
-            disabled={pageNumber < 1}
+            disabled={pageNumber <= 1}
             onClick={() => setPageNumber(pageNumber - 1)}
           >
             Previous page
