@@ -1,13 +1,13 @@
-import "./App.css";
-import { Route, Routes } from "react-router-dom";
-import AllUrls from "./routes/AllUrls";
-import AuditLogs from "./routes/AuditLogs";
-import AuthProvider from "./AuthProvider";
-import Container from "react-bootstrap/Container";
-import Login from "./routes/Login";
-import Navigation from "./components/Navigation";
-import PrivateRoute from "./components/PrivateRoute";
-import ShortenUrl from "./routes/ShortenUrl";
+import './App.css';
+import { Route, Routes } from 'react-router-dom';
+import AllUrls from './routes/AllUrls';
+import AuditLogs from './routes/AuditLogs';
+import AuthProvider from './AuthProvider';
+import Container from 'react-bootstrap/Container';
+import Login from './routes/Login';
+import Navigation from './components/Navigation';
+import PrivateRoute from './components/PrivateRoute';
+import ShortenUrl from './routes/ShortenUrl';
 
 function App() {
   return (
