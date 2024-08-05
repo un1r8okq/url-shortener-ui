@@ -8,8 +8,6 @@ import LoadingMessage from './LoadingMessage';
 const PrivateRoute = ({ children }) => {
     const authStatus = useContext(authContext);
 
-    console.log(`Authentication status is ${authStatus}`);
-
     switch (authStatus) {
         case constants.authStatus.loading:
             return <LoadingMessage message='Checking that you are authenticated' />;

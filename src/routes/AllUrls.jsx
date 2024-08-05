@@ -29,7 +29,6 @@ export default function AllUrls() {
         setUrls(data);
         setLoading(false);
       } catch (error) {
-        console.error(error);
         setError(
           'Something went wrong when fetching the list of URLs. Please try again later.',
         );

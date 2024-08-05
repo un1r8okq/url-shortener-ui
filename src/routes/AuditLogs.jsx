@@ -31,7 +31,6 @@ export default function AuditLogs() {
         setLogs(data);
         setLoading(false);
       } catch (error) {
-        console.error(error);
         setError(
           'Something went wrong when fetching the audit logs. Please try again later.',
         );

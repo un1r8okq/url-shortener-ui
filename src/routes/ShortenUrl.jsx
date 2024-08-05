@@ -18,8 +18,6 @@ export default function ShortenUrl() {
       const result = await apiClient.shortenUrl(longUrl);
       setShortenedUrl(result.data.shortenedUrl);
     } catch (error) {
-      console.error(error);
-
       if (error.code === 'ERR_NETWORK') {
         setError('Unable to contact server. Please try again later.');
       } else if (error.code === 'ERR_BAD_RESPONSE') {

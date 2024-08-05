@@ -17,6 +17,7 @@ module.exports = {
   rules: {
     '@stylistic/js/comma-dangle': ['error', 'always-multiline'],
     '@stylistic/js/semi': ['error', 'always'],
+    'no-console': 'error',
     'react/jsx-no-target-blank': 'off',
     'react-refresh/only-export-components': [
       'warn',
