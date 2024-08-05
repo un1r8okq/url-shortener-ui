@@ -1,6 +1,6 @@
-import Spinner from 'react-bootstrap/Spinner';
-import PropTypes from 'prop-types';
 import { useEffect, useState } from 'react';
+import PropTypes from 'prop-types';
+import Spinner from 'react-bootstrap/Spinner';
 
 
 const LoadingMessage = ({ message }) => {

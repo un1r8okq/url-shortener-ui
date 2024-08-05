@@ -1,10 +1,10 @@
+import AuthContext from '../authContext';
 import Container from 'react-bootstrap/Container';
+import { LinkContainer } from 'react-router-bootstrap';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { LinkContainer } from 'react-router-bootstrap';
-import AuthContext from '../authContext';
-import { useContext } from 'react';
 import constants from '../constants';
+import { useContext } from 'react';
 
 export default function Navigation() {
   const isAuthenticated = useContext(AuthContext);

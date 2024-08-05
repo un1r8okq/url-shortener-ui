@@ -1,9 +1,9 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { useState } from 'react';
+import Alert from 'react-bootstrap/Alert';
 import CreateShortUrl from '../components/CreateShortUrl';
 import ShortUrlResult from '../components/ShortUrlResult';
-import Alert from 'react-bootstrap/Alert';
 import apiClient from '../api/apiClient';
+import { useState } from 'react';
 
 export default function ShortenUrl() {
   const [shortenButtonDisabled, setShortenButtonDisabled] = useState(false);

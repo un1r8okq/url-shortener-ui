@@ -1,6 +1,6 @@
-import { parseISO } from 'date-fns';
-import { formatDateRelative } from '../utilities';
 import PropTypes from 'prop-types';
+import { formatDateRelative } from '../utilities';
+import { parseISO } from 'date-fns';
 
 const RelativeDateCell = ({ children }) => {
   return (

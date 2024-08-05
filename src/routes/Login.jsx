@@ -1,8 +1,8 @@
-import { useContext } from 'react';
 import LoginButton from '../components/LoginButton';
+import { Navigate } from 'react-router-dom';
 import authContext from '../authContext';
 import constants from '../constants';
-import { Navigate } from 'react-router-dom';
+import { useContext } from 'react';
 
 const Login = () => {
     const authStatus = useContext(authContext);

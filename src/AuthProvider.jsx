@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import httpClient from './api/httpClient';
 import authContext from './authContext';
 import constants from './constants';
+import httpClient from './api/httpClient';
 
 const AuthProvider = ({ children }) => {
   const [authStatus, setAuthStatus] = useState(constants.authStatus.loading);

@@ -1,9 +1,9 @@
-import PropTypes from 'prop-types';
-import { useContext } from 'react';
-import authContext from '../authContext';
-import { Navigate } from 'react-router-dom';
-import constants from '../constants';
 import LoadingMessage from './LoadingMessage';
+import { Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import authContext from '../authContext';
+import constants from '../constants';
+import { useContext } from 'react';
 
 const PrivateRoute = ({ children }) => {
     const authStatus = useContext(authContext);

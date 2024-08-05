@@ -1,5 +1,5 @@
-import httpClient from './httpClient';
 import constants from '../constants';
+import httpClient from './httpClient';
 
 const apiClient = {
   /**
