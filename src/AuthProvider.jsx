@@ -10,7 +10,7 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await httpClient.get('/api/v1/auth/status');
+        const response = await httpClient.get('/auth/status');
 
         if (response.status === 200) {
           setAuthStatus(constants.authStatus.authenticated);

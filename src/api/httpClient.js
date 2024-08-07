@@ -1,7 +1,10 @@
 import axios from 'axios';
 import axiosRetry from 'axios-retry';
+import constants from '../constants';
 import { sleep } from '../utilities';
 
+
+const baseUrl = constants.apiBaseUrl;
 const client = axios.create();
 
 axiosRetry(client, {
@@ -19,22 +22,28 @@ const httpClient = {
    */
   post: async (path, data) => {
     try {
-      return await client.post(path, data);
+      const csrfResponse = await httpClient.get('/auth/csrf-token');
+
+      const config = {
+        headers: { 'X-CSRF-TOKEN': csrfResponse.data.token },
+      };
+
+      return await client.post(baseUrl + path, data, config);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
         // that falls out of the range of 2xx
-        throw Error(`GET ${path} returned ${error.response.status}`);
+        throw Error(`POST ${path} returned ${error.response.status}`);
       }
 
       if (error.request) {
         // The request was made but no response was received
         // `error.request` is an instance of XMLHttpRequest
-        throw Error(`GET ${path} received no response`);
+        throw Error(`POST ${path} received no response`);
       }
 
       throw Error(
-        `An unexpected error occurred setting up the request for GET ${path}`,
+        `An unexpected error occurred setting up the request for POST ${path}`,
       );
     }
   },
@@ -46,7 +55,7 @@ const httpClient = {
   get: async (path) => {
     try {
       await sleep(150);
-      return await client.get(path);
+      return await client.get(baseUrl + path);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code

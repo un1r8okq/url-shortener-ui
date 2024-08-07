@@ -4,6 +4,7 @@ import react from '@vitejs/plugin-react';
 const proxyOptions =  {
   target: 'http://localhost:8080',
   xfwd: true,
+  changeOrigin: true,
 };
 
 // https://vitejs.dev/config/

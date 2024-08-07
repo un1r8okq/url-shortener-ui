@@ -1,4 +1,3 @@
-import constants from '../constants';
 import httpClient from './httpClient';
 
 const apiClient = {
@@ -8,9 +7,7 @@ const apiClient = {
    * @returns {Promise<PagedUrlResponses>}
    */
   getUrls: async (pageNumber) => {
-    const response = await httpClient.get(
-      `${constants.apiBaseUrl}/urls?pageNumber=${pageNumber}`,
-    );
+    const response = await httpClient.get(`/urls?pageNumber=${pageNumber}`);
 
     return response.data;
   },
@@ -19,7 +16,7 @@ const apiClient = {
    * @param {String} longUrl 
    */
   shortenUrl: async (longUrl) => {
-    const response = await httpClient.post('/api/v1/urls', { longUrl });
+    const response = await httpClient.post('/urls', { longUrl });
 
     return response.data;
   },
