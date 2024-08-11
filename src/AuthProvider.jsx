@@ -23,8 +23,12 @@ const AuthProvider = ({ children }) => {
     checkAuthStatus();
   }, []);
 
+  const logout = () => {
+    setAuthStatus(constants.authStatus.unauthenticated);
+  };
+
   return (
-    <authContext.Provider value={authStatus}>
+    <authContext.Provider value={{ authStatus, logout }}>
       {children}
     </authContext.Provider>
   );

@@ -3,15 +3,37 @@ import axiosRetry from 'axios-retry';
 import constants from '../constants';
 import { sleep } from '../utilities';
 
-
 const baseUrl = constants.apiBaseUrl;
-const client = axios.create();
+const axiosInstance = axios.create();
 
-axiosRetry(client, {
+axiosRetry(axiosInstance, {
   retries: 6,
   retryCondition: axiosRetry.isNetworkOrIdempotentRequestError,
   retryDelay: axiosRetry.exponentialDelay,
 });
+
+/**
+ * Register a function to be called when the httpclient returns 403 Forbidden.
+ * Call this from within an Effect.
+ * @param {Function} logoutFn 
+ * @returns {Function}
+ */
+const interceptForbidden = (logoutFn) => {
+  const interceptor = axiosInstance.interceptors.response.use(
+    response => response,
+    error => {
+      if (error.response && error.response.status === axios.HttpStatusCode.Forbidden) {
+        logoutFn();
+      }
+
+      return Promise.reject(error);
+    },
+  );
+
+  return () => {
+    axiosInstance.interceptors.response.eject(interceptor);
+  };
+};
 
 const httpClient = {
   /**
@@ -28,7 +50,7 @@ const httpClient = {
         headers: { 'X-CSRF-TOKEN': csrfResponse.data.token },
       };
 
-      return await client.post(baseUrl + path, data, config);
+      return await axiosInstance.post(baseUrl + path, data, config);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -55,7 +77,7 @@ const httpClient = {
   get: async (path) => {
     try {
       await sleep(150);
-      return await client.get(baseUrl + path);
+      return await axiosInstance.get(baseUrl + path);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -77,3 +99,4 @@ const httpClient = {
 };
 
 export default httpClient;
+export { interceptForbidden };

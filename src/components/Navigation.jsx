@@ -7,9 +7,9 @@ import constants from '../constants';
 import { useContext } from 'react';
 
 export default function Navigation() {
-  const isAuthenticated = useContext(AuthContext);
+  const { authStatus } = useContext(AuthContext);
 
-  const navLinks = isAuthenticated === constants.authStatus.authenticated && (
+  const navLinks = authStatus === constants.authStatus.authenticated && (
     <>
       <LinkContainer to="/">
         <Nav.Link>Shorten URL</Nav.Link>

@@ -5,7 +5,7 @@ import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import LoadingMessage from '../components/LoadingMessage';
 import RelativeDateCell from '../components/RelativeDateCell';
 import Table from 'react-bootstrap/Table';
-import axios from 'axios';
+import apiClient from '../api/apiClient';
 
 export default function AuditLogs() {
   const [error, setError] = useState('');
@@ -20,11 +20,7 @@ export default function AuditLogs() {
       setError('');
       setLogs([]);
       try {
-        const response = await axios.get(
-          `/api/v1/audit-logs?pageNumber=${pageNumber}`,
-        );
-
-        const { data, paginationMetadata } = response.data;
+        const { data, paginationMetadata } = await apiClient.getAuditLogs(pageNumber);
 
         setTotalPages(paginationMetadata.totalPages);
         setLogs(data);

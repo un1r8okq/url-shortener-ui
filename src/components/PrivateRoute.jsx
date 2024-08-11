@@ -6,7 +6,7 @@ import constants from '../constants';
 import { useContext } from 'react';
 
 const PrivateRoute = ({ children }) => {
-    const authStatus = useContext(authContext);
+    const { authStatus } = useContext(authContext);
 
     switch (authStatus) {
         case constants.authStatus.loading:

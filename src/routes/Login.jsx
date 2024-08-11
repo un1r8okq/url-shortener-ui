@@ -5,7 +5,7 @@ import constants from '../constants';
 import { useContext } from 'react';
 
 const Login = () => {
-    const authStatus = useContext(authContext);
+    const { authStatus } = useContext(authContext);
 
     if (authStatus === constants.authStatus.authenticated) {
         return <Navigate to="/" />;

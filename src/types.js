@@ -1,4 +1,12 @@
 /**
+ * @typedef {Object} AuditLogResponse
+ * @property {Number} id
+ * @property {String} createdTimestampUtc
+ * @property {String} logType
+ * @property {String} message
+ */
+
+/**
  * @typedef {Object} UrlResponse
  * @property {String} longUrl
  * @property {String} shortenedUrl
@@ -11,6 +19,12 @@
  * @property {Number} pageNumber
  * @property {Number} totalPages
  * @property {Number} pageSize
+ */
+
+/**
+ * @typedef {Object} PagedAuditLogResponses
+ * @property {Array<AuditLogResponse>} data
+ * @property {?PaginationMetadata} paginationMetadata
  */
 
 /**
