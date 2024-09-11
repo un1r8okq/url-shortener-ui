@@ -15,6 +15,7 @@ export default defineConfig({
       '^/api/.+': proxyOptions,
       '^/s/.+': proxyOptions,
       '^/login/.+': proxyOptions,
+      '^/logout': proxyOptions,
       '^/oauth2/.+': proxyOptions,
     },
   },

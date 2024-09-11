@@ -1,3 +1,4 @@
+import constants from '../constants';
 import httpClient from './httpClient';
 
 /**
@@ -41,6 +42,8 @@ import httpClient from './httpClient';
  * @property {String} email
  */
 
+const baseUrl = constants.apiBaseUrl;
+
 const apiClient = {
   /**
    * Get all audit logs by page
@@ -48,7 +51,7 @@ const apiClient = {
    * @returns {Promise<AuditLogResponse>}
    */
   getAuditLogs: async (pageNumber) => {
-    const response = await httpClient.get(`/audit-logs?pageNumber=${pageNumber}`);
+    const response = await httpClient.get(`${baseUrl}/audit-logs?pageNumber=${pageNumber}`);
 
     return response.data;
   },
@@ -58,7 +61,7 @@ const apiClient = {
    * @returns {Promise<PagedUrlResponses>}
    */
   getUrls: async (pageNumber) => {
-    const response = await httpClient.get(`/urls?pageNumber=${pageNumber}`);
+    const response = await httpClient.get(`${baseUrl}/urls?pageNumber=${pageNumber}`);
 
     return response.data;
   },
@@ -67,16 +70,19 @@ const apiClient = {
    * @returns {Promise<?UserResponse>}
    */
   getAuthenticatedUser: async () => {
-    const response = await httpClient.get('/auth/user');
+    const response = await httpClient.get(`${baseUrl}/auth/user`);
 
     return response.data;
+  },
+  logout: async () => {
+    await httpClient.post('/logout', null);
   },
   /**
    * Shorten a long URL
    * @param {String} longUrl 
    */
   shortenUrl: async (longUrl) => {
-    const response = await httpClient.post('/urls', { longUrl });
+    const response = await httpClient.post(`${baseUrl}/urls`, { longUrl });
 
     return response.data;
   },

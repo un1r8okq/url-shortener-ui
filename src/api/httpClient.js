@@ -3,7 +3,6 @@ import axiosRetry from 'axios-retry';
 import constants from '../constants';
 import { sleep } from '../utilities';
 
-const baseUrl = constants.apiBaseUrl;
 const axiosInstance = axios.create();
 
 axiosRetry(axiosInstance, {
@@ -44,13 +43,13 @@ const httpClient = {
    */
   post: async (path, data) => {
     try {
-      const csrfResponse = await httpClient.get('/auth/csrf-token');
+      const csrfResponse = await httpClient.get(`${constants.apiBaseUrl}/auth/csrf-token`);
 
       const config = {
         headers: { 'X-CSRF-TOKEN': csrfResponse.data.token },
       };
 
-      return await axiosInstance.post(baseUrl + path, data, config);
+      return await axiosInstance.post(path, data, config);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code
@@ -77,7 +76,7 @@ const httpClient = {
   get: async (path) => {
     try {
       await sleep(150);
-      return await axiosInstance.get(baseUrl + path);
+      return await axiosInstance.get(path);
     } catch (error) {
       if (error.response) {
         // The request was made and the server responded with a status code

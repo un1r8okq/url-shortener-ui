@@ -8,6 +8,7 @@ import Login from './routes/Login';
 import Navigation from './components/Navigation';
 import PrivateRoute from './components/PrivateRoute';
 import ShortenUrl from './routes/ShortenUrl';
+import User from './routes/User';
 import authContext from './authContext';
 import { interceptForbidden } from './api/httpClient';
 
@@ -24,6 +25,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/all-urls" element={<PrivateRoute><AllUrls /></PrivateRoute>} />
           <Route path="/audit-logs" element={<PrivateRoute><AuditLogs /></PrivateRoute>} />
+          <Route path="/user" element={<PrivateRoute><User /></PrivateRoute>} />
         </Routes>
       </Container>
     </div>

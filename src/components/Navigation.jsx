@@ -20,6 +20,9 @@ export default function Navigation() {
       <LinkContainer to="/audit-logs">
         <Nav.Link>Audit Logs</Nav.Link>
       </LinkContainer>
+      <LinkContainer to="/user">
+        <Nav.Link>User</Nav.Link>
+      </LinkContainer>
     </>
   );
 
