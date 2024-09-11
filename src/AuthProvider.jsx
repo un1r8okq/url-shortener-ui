@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
+import apiClient from './api/apiClient';
 import authContext from './authContext';
 import constants from './constants';
-import httpClient from './api/httpClient';
 
 const AuthProvider = ({ children }) => {
   const [authStatus, setAuthStatus] = useState(constants.authStatus.loading);
@@ -10,9 +10,9 @@ const AuthProvider = ({ children }) => {
   useEffect(() => {
     const checkAuthStatus = async () => {
       try {
-        const response = await httpClient.get('/auth/status');
+        const response = await apiClient.getAuthenticatedUser('/auth/user');
 
-        if (response.status === 200) {
+        if (response) {
           setAuthStatus(constants.authStatus.authenticated);
         }
       } catch (error) {
