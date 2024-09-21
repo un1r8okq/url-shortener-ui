@@ -57,11 +57,22 @@ const apiClient = {
   },
   /**
    * Get all shortened URLs by page
+   * @param {String} search
    * @param {Number} pageNumber
    * @returns {Promise<PagedUrlResponses>}
    */
-  getUrls: async (pageNumber) => {
-    const response = await httpClient.get(`${baseUrl}/urls?pageNumber=${pageNumber}`);
+  getUrls: async (search, pageNumber) => {
+    const currentUrl = new URL(location.href);
+
+    const url = new URL(`${currentUrl.origin}${baseUrl}/urls`);
+    if (search) {
+      url.searchParams.append('search', search);
+    }
+
+    url.searchParams.append('pageNumber', pageNumber);
+
+    // const url = `${baseUrl}/urls?search=${search}&pageNumber${pageNumber}`;
+    const response = await httpClient.get(url.toString());
 
     return response.data;
   },
